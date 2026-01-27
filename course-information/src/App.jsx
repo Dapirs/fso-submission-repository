@@ -1,6 +1,7 @@
 import Header from './Header.jsx'
 import Content from './Content.jsx'
 import Total from './Total.jsx'
+import {useState} from 'react'
 const App = () => {
     const course = {
         name: 'Half Stack application development',
@@ -20,6 +21,7 @@ const App = () => {
         ]
     }
 
+
     return (
         <div>
             <Header course={course.name}/>
@@ -29,6 +31,7 @@ const App = () => {
             <Total
                 parts={course.parts}
             />
+
         </div>
     )
 }
