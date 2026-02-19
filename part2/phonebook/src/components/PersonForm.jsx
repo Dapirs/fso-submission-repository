@@ -6,7 +6,7 @@ const PersonForm = (props) => {
                 <div>
                     name: <input
                     value={props.newName}
-                    onChange={addPerson}
+                    onChange={props.addPerson}
                 />
                     <br/>
                     number: <input
