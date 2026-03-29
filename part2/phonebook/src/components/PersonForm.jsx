@@ -13,6 +13,7 @@ const PersonForm = (props) => {
                     value={props.newNumber}
                     onChange={props.addNumber}
                 />
+
                 </div>
                 <div>
                     <button type="submit">add</button>

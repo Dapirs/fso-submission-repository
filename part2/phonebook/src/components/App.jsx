@@ -2,6 +2,7 @@ import Filter from "./Filter";
 import PersonForm from "./PersonForm.jsx";
 import Numbers from "./Numbers.jsx";
 import axios from "axios";
+import contactService from '../services/notes.js'
 
 import { useState, useEffect } from 'react'
 
@@ -13,9 +14,9 @@ const App = () => {
     const [filter, setFilter] = useState('')
 
     useEffect(() =>{
-        axios.get("http://localhost:3001/persons")
-            .then(response => {
-                setPersons(response.data);
+        contactService.getAll()
+            .then(initialContact => {
+                setPersons(initialContact);
             })
     }, [])
 
@@ -37,14 +38,38 @@ const App = () => {
             name: newName,
             number: newNumber
         }
-        const nameExists = persons.some((p) => p.name === person.name)
-        if (nameExists){
-            alert("Name already exists!")
-        } else {
-            setPersons(persons.concat(person))
-        }
+        const newNameExists = persons.find((personName) => personName.name === person.name)
+        const changedContact = {...newNameExists, number: person.number}
+
+
+            if (newNameExists) {
+                if (newNameExists.number !== person.number){
+                    if (window.confirm("This name already exists. Are you sure you want to modify the number?")) {
+                        contactService.update(newNameExists.id, changedContact).then((returnedContact) => {
+                            setPersons(persons.map((p) => p.id === newNameExists.id ? returnedContact : p))
+                        })
+                    }
+                } else {
+                    alert("Name already exists! ")
+                }
+            }
+            else{
+                contactService.create(person).then(returnedContact => {
+                        setPersons(persons.concat(returnedContact))
+                    })
+            }
         setNewName('')
         setNumber('')
+    }
+
+    const deleteContact = (id) =>{
+
+            if (window.confirm('Are you sure you want to delete?')) {
+                contactService.remove(id).then(() => {
+                setPersons(prev => prev.filter(person => person.id !== id))
+            })
+
+        }
     }
 
     const personsToShow = filter === '' ? persons : persons.filter((person) => person.name.includes(filter))
@@ -75,6 +100,7 @@ const App = () => {
             </div>
             <Numbers
                 personsToShow={personsToShow}
+                deleteContact = {deleteContact}
             />
         </>
 

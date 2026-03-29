@@ -1,8 +1,25 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": 9066644666
+      "name": "mahesh",
+      "number": "9066644665",
+      "id": "DdbgQXN3tIA"
+    },
+    {
+      "name": "vandana",
+      "number": "8050665479",
+      "id": "pL3q-HUxITM"
+    },
+    {
+      "name": "sripad",
+      "number": "9449483602",
+      "id": "zdCyS9IEU14"
+    },
+    {
+      "name": "sunny",
+      "number": "9845200926",
+      "id": "obYB_u8wK2c"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
