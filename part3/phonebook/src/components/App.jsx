@@ -3,7 +3,6 @@ import PersonForm from "./PersonForm.jsx";
 import Numbers from "./Numbers.jsx";
 import contactService from '../services/notes.js'
 import Notification from "./Notification.jsx"
-
 import { useState, useEffect } from 'react'
 
 const App = () => {
